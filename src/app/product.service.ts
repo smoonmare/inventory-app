@@ -18,7 +18,8 @@ function generateId() {
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+
+export class ProductsService {
   products: IProduct[] = [{
     id: generateId(),
     name: 'IPhone 12 Pro',
