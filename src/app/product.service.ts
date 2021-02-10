@@ -8,7 +8,7 @@ export interface IProduct {
   expirationDate: string | null;
   description: string | null;
   type: string | null;
-  features?: string[] | null;
+
 }
 
 function generateId() {

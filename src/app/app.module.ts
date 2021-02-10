@@ -8,6 +8,7 @@ import { ProductsComponent } from './products/products.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { DeleteProductModalComponent } from './delete-product-modal/delete-product-modal.component';
+import { ProductsService } from './product.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { DeleteProductModalComponent } from './delete-product-modal/delete-produ
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [ProductsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
