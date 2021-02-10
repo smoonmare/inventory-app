@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 export interface IProduct {
-  id: number;
-  name: string;
-  active: boolean;
-  expirationDate: string;
-  description: string;
-  type: string;
-  features?: string[];
+  id: number | null;
+  name: string | null;
+  active: boolean | null;
+  expirationDate: string | null;
+  description: string | null;
+  type: string | null;
+  features?: string[] | null;
 }
 
 function generateId() {
