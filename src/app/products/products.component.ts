@@ -16,4 +16,22 @@ export class ProductsComponent {
   trackById(index: any, item: any) {
     return item.id;
   }
+
+  delete = false;
+  productToBeDeleted : any;
+  onDelete(product : any) {
+    this.delete = true;
+    this.productToBeDeleted = product;
+  }
+
+  handleCancel() {
+    this.delete = false;
+  }
+
+  confirmDelete() {
+    this.handleCancel();
+    // Need to implement this method removeProduct in our ProductService
+    this.productsService.removeProduct(this.productToBeDeleted);
+  }
+
 }

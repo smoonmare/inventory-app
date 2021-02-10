@@ -11,7 +11,7 @@ export interface IProduct {
 
 }
 
-function generateId() {
+function generateId() : number {
   return Math.floor(Math.random() * 1000);
 }
 
@@ -106,5 +106,14 @@ export class ProductsService {
     type: 'tv'
   }];
   products$ = new BehaviorSubject<IProduct[]>(this.products);
+
+  removeProduct(product : any) {
+    const index = this.products.indexOf(product);
+    this.products = [
+      ...this.products.splice(0, index),
+      ...this.products.splice(index + 1),
+    ];
+    this.products$.next(this.products);
+  }
 
 }
