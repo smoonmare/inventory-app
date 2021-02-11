@@ -10,25 +10,25 @@ import { Observable } from 'rxjs';
 })
 
 export class ProductsComponent {
+  delete = false;
+  productToBeDeleted: any;
   products$: Observable<IProduct[]> = this.productsService.products$;
 
   constructor(private productsService: ProductsService) { }
-  trackById(index: any, item: any) {
+  trackById(index: number, item: any): number {
     return item.id;
   }
 
-  delete = false;
-  productToBeDeleted : any;
-  onDelete(product : any) {
+  onDelete(product: any): any {
     this.delete = true;
     this.productToBeDeleted = product;
   }
 
-  handleCancel() {
+  handleCancel(): void {
     this.delete = false;
   }
 
-  confirmDelete() {
+  confirmDelete(): void {
     this.handleCancel();
     // Need to implement this method removeProduct in our ProductService
     this.productsService.removeProduct(this.productToBeDeleted);
