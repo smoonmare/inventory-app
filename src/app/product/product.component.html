@@ -33,14 +33,15 @@
         <clr-input-container>
           <label for="product-name">Product Name *</label>
           <input clrInput type="text" id="product-name"
-          placeholder="IPhone 12..." formControlName="name">
+          placeholder="IPhone 12..." formControlName="name"/>
         </clr-input-container>
         <!-- Toggle Switch for active -->
-        <div class="toggle-switch">
-          <input type="checkbox" id="active"
-          formControlName="active">
-          <label for="active">Active</label>
-        </div>
+        <clr-toggle-container>
+          <clr-toggle-wrapper>
+            <input type="checkbox" clrToggle id="active" formControlName="active"/>
+            <label>Active</label>
+          </clr-toggle-wrapper>
+        </clr-toggle-container>
         <!-- Textarea for Product Description -->
         <clr-textarea-container>
           <label for="description">Product Description</label>
@@ -51,7 +52,7 @@
         <label class="clr-control-label">Features</label>
         <clr-input-container formArrayName="features"
         *ngFor="let control of basicFeatures.controls">
-          <input clrInput type="text" [formControl]="control" placeholder="IPhone 12...">
+          <input clrInput type="text" [formControl]="control" placeholder="IPhone 12..."/>
         </clr-input-container>
         <button class="btn btn-primary" (click)="addFeatures()">Add Features</button>
       </div>
