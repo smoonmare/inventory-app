@@ -10,6 +10,25 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class ProductComponent implements OnInit {
   @Input() product: any;
   productForm: FormGroup;
+  deviceType = 'tablet';
+
+  deviceTypes = [{
+    name: 'Tablet',
+    icon: 'tablet',
+  }, {
+    name: 'Laptop',
+    icon: 'computer',
+  }, {
+    name: 'Phone',
+    icon: 'mobile',
+  }, {
+    name: 'Monitor',
+    icon: 'display',
+  }];
+  selectDevice(device: any): any {
+    this.deviceType = device.icon;
+  }
+
   constructor(private fb: FormBuilder) {
     this.productForm = this.fb.group({
       basic: fb.group({
