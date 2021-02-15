@@ -66,6 +66,10 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get isBasicInvalid(): boolean {
+    return this.productForm.get('basic')!.invalid;
+  }
+
   get expirationError(): any {
     if (this.productForm.get('expiration.expirationDate')!.hasError('required')) {
         return 'This Field is Required!';

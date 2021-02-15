@@ -57,6 +57,12 @@
         </clr-input-container>
         <button class="btn btn-primary" (click)="addFeatures()">Add Features</button>
       </div>
+      <ng-template clrPageButtons>
+        <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
+        <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
+        <clr-wizard-button [clrWizardButtonDisabled]="isBasicInvalid"
+        [type]="'next'">Next</clr-wizard-button>
+      </ng-template>
     </clr-wizard-page>
     <clr-wizard-page>
       <ng-template clrPageTitle>Expiration Info</ng-template>
