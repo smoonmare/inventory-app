@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 export interface IProduct {
-  id: number | null;
-  name: string | null;
-  active: boolean | null;
-  expirationDate: string | null;
-  description: string | null;
-  type: string | null;
-
+  id?: number | null;
+  name?: string | null;
+  active?: boolean | null;
+  expirationDate?: string | null;
+  description?: string | null;
+  type?: string | null;
 }
 
 function generateId(): number {
@@ -127,7 +126,7 @@ export class ProductsService {
     this.products$.next(this.products);
   }
 
-  editProduct(id: number | null, product: any): any {
+  editProduct(id?: number, product?: any): any {
     const index = this.products.findIndex(p => p.id === id);
     this.products = [
       ...this.products.slice(0, index),

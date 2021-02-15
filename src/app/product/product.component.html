@@ -53,9 +53,9 @@
         <label class="clr-control-label">Features</label>
         <clr-input-container formArrayName="features"
         *ngFor="let control of basicFeatures.controls">
-          <input clrInput type="text" [formControl]="control" placeholder="IPhone 12..."/>
+          <input clrInput type="text" formControlName="control" placeholder="IPhone 12..."/>
         </clr-input-container>
-        <button class="btn btn-primary" (click)="addFeatures()">Add Features</button>
+        <button class="btn btn-primary" (click)="addFeature()">Add Features</button>
       </div>
       <ng-template clrPageButtons>
         <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>

@@ -53,7 +53,7 @@ export class ProductsComponent implements OnInit {
     if (event && event.product) {
       if (this.selectedProduct) {
         // Edit Flow
-        this.productsService.editProduct(this.selectedProduct.id, event.product);
+        this.productsService.editProduct(this.selectedProduct.id!, event.product);
       } else {
         // Save New
         this.productsService.addProduct(event.product);
