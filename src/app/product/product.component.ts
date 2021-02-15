@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, Output, ViewChild, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
+import { ClrWizard } from '@clr/angular';
 
 function minDateValidation(date: Date): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} | null => {
@@ -16,10 +17,12 @@ function minDateValidation(date: Date): ValidatorFn {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductComponent implements OnInit {
-  @Input() product: any;
   productForm: FormGroup;
+  @Input() product: any;
+  @Output() finish = new EventEmitter();
+  @ViewChild('productWizard', { static: false }) productWizard!: ClrWizard;
+  
   deviceType = 'tablet';
-
   deviceTypes = [{
     name: 'Tablet',
     icon: 'tablet',
@@ -77,5 +80,32 @@ export class ProductComponent implements OnInit {
     if     (this.productForm.get('expiration.expirationDate')!.hasError('minDateValidation')) {
         return 'Expiration should be after today\'s date';
     }
+  }
+
+  get isExpirationInvalid(): boolean {
+    return this.productForm.get('expiration')!.invalid;
+  }
+
+  handleClose() {
+    this.finish.emit();
+    this.handleClose();
+  }
+
+  close() {
+    this.productForm.reset();
+    this.deviceType = 'tablet';
+    this.productWizard.goTo(this.productWizard.pageCollection.pages.first.id);
+    this.productWizard.reset();
+  }
+
+  handleFinish() {
+    this.finish.emit({
+      product: {
+        type: this.deviceType,
+        ...this.productForm.get('basic')?.value,
+        ...this.productForm.get('expiration')?.value,
+      }
+    });
+    this.close();
   }
 }

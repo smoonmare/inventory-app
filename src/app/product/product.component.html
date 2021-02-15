@@ -70,6 +70,10 @@
         <input type="date" clrInput clrDate formControlName="expirationDate"/>
         <clr-control-error>{{expirationError}}</clr-control-error>
       </clr-input-container>
+      <ng-template clrPageButtons>
+        <clr-wizard-button [clrWizardButtonDisabled]="isExpirationInvalid"
+        (click)="handleFinish()" [type]="'finish'">Finish</clr-wizard-button>
+      </ng-template>
     </clr-wizard-page>
   </clr-wizard>
 </form>
