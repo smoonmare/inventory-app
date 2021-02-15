@@ -9,12 +9,17 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   delete = false;
   productToBeDeleted: any;
   products$: Observable<IProduct[]> = this.productsService.products$;
+  productOpen?: boolean;
+  selectedProduct?: IProduct;
 
   constructor(private productsService: ProductsService) { }
+  
+  ngOnInit() {}
+
   trackById(index: number, item: any): number {
     return item.id;
   }
@@ -34,4 +39,26 @@ export class ProductsComponent {
     this.productsService.removeProduct(this.productToBeDeleted);
   }
 
+  addProduct() {
+    this.productOpen = true;
+    this.selectedProduct = undefined;
+  }
+
+  onEdit(product: any): any {
+    this.productOpen = true;
+    this.selectedProduct = product;
+  }
+
+  handleFinish(event: any) {
+    if (event && event.product) {
+      if (this.selectedProduct) {
+        // Edit Flow
+        this.productsService.editProduct(this.selectedProduct.id, event.product);
+      } else {
+        // Save New
+        this.productsService.addProduct(event.product);
+      }
+    }
+    this.productOpen = false;
+  }
 }

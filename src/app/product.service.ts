@@ -127,4 +127,17 @@ export class ProductsService {
     this.products$.next(this.products);
   }
 
+  editProduct(id: number | null, product: any): any {
+    const index = this.products.findIndex(p => p.id === id);
+    this.products = [
+      ...this.products.slice(0, index),
+      {
+        id,
+        ...product,
+      },
+      ...this.products.slice(index + 1),
+    ];
+    this.products$.next(this.products);
+  }
+
 }
