@@ -1,5 +1,13 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
+
+function minDateValidation(date: Date): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} | null => {
+    const forbidden = new Date(control.value) < date;
+    return forbidden ? {minDateValidation: {value: control.value}}
+    : null;
+  };
+}
 
 @Component({
   selector: 'in-product',
@@ -48,7 +56,9 @@ export class ProductComponent implements OnInit {
         ])
       }),
       expiration: fb.group({
-        expirationDate: null,
+        expirationDate: [null,
+        Validators.compose([Validators.required,
+        minDateValidation(new Date())])],
       })
     });
   }
@@ -56,4 +66,12 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get expirationError(): any {
+    if (this.productForm.get('expiration.expirationDate')!.hasError('required')) {
+        return 'This Field is Required!';
+    }
+    if     (this.productForm.get('expiration.expirationDate')!.hasError('minDateValidation')) {
+        return 'Expiration should be after today\'s date';
+    }
+  }
 }

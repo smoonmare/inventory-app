@@ -34,6 +34,7 @@
           <label for="product-name">Product Name *</label>
           <input clrInput type="text" id="product-name"
           placeholder="IPhone 12..." formControlName="name"/>
+          <clr-control-error>This Field is Required!</clr-control-error>
         </clr-input-container>
         <!-- Toggle Switch for active -->
         <clr-toggle-container>
@@ -61,6 +62,7 @@
       <ng-template clrPageTitle>Expiration Info</ng-template>
       <clr-input-container formGroupName="expiration">
         <input type="date" clrInput clrDate formControlName="expirationDate"/>
+        <clr-control-error>{{expirationError}}</clr-control-error>
       </clr-input-container>
     </clr-wizard-page>
   </clr-wizard>
