@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, Output, ViewChild, EventEmitter, OnChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
 import { ClrWizard } from '@clr/angular';
-import pick from 'lodash';
+import pick from 'lodash/pick';
 
 function minDateValidation(date: Date): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} | null => {
