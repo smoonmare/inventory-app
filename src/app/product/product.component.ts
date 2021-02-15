@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, Output, ViewChild, EventEmitter, OnChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
 import { ClrWizard } from '@clr/angular';
+import pick from 'lodash';
 
 function minDateValidation(date: Date): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} | null => {
@@ -66,7 +67,23 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    if (this.product) {
+      this.productForm.setValue({
+        basic: {
+          ...pick(this.product),
+          features: this.product.features || [''],
+        },
+        expiration: {
+          ...pick(this.product),
+        }
+      });
+      this.deviceType = this.product.type;
+    }
+  }
+
+  ngOnChanges() {
+    this.ngOnInit();
   }
 
   get isBasicInvalid(): boolean {
